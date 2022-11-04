@@ -5,7 +5,7 @@ import "./ImageLinkForm.css";
 const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
   return (
     <div>
-      <p className="f3">Detect A Face In Your Images</p>
+      <p className="f3">Post Image https Link Below To Detect Face</p>
       <div className="center ">
         <div className="form center pa4 br3 shadow-5">
           <input
