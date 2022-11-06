@@ -1,6 +1,9 @@
 {
   "name": "facerec-app",
   "version": "0.1.0",
+  "engines": {
+    "node": "17.9.0"
+  },
   "private": true,
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
