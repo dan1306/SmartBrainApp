@@ -14,6 +14,7 @@ const FaceRrecognition = ({ imageUrl, box }) => {
               width="500px"
               height="auto"
             />
+            
             <div
               className="bounding-box"
               style={{

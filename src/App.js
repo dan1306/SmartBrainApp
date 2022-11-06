@@ -28,8 +28,6 @@ class App extends Component {
     };
   }
 
-
-
   loadUser = (data) => {
     this.setState({
       input: "",
@@ -58,8 +56,8 @@ class App extends Component {
     };
   };
 
-  displayFaceBox = (box) => {
-    this.setState({ box: box });
+  displayFaceBox = (arr) => {
+    this.setState({ box: arr });
   };
 
   onInputChange = (event) => {
@@ -69,32 +67,31 @@ class App extends Component {
   onButtonSubmit = async () => {
     await this.setState({ imageUrl: this.state.input, box: {} });
     const data = {
-      method: 'POST',
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        imageUrl: this.state.imageUrl
+        imageUrl: this.state.imageUrl,
       }),
-    }
+    };
     let getImage = await fetch(`http://localhost:3000/getImage`, data);
-    let res = await getImage.json()
-    console.log("Daniel", res)
-    await this.displayFaceBox(this.calculateFaceLocation(res))
+    console.log("Daniel", getImage);
+    let res = await getImage.json();
+    console.log("Daniel2.0", res);
+    
+    await this.displayFaceBox(this.calculateFaceLocation(res));
     if (res) {
       let data2 = {
-        method: 'PUT',
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: this.state.user.id
+          id: this.state.user.id,
         }),
-      }
+      };
 
       let updaateUserEntry = await fetch(`http://localhost:3000/image`, data2);
-      let entr = await updaateUserEntry.json()
-      await this.setState(Object.assign(this.state.user, { entries: entr}))
-
+      let entr = await updaateUserEntry.json();
+      await this.setState(Object.assign(this.state.user, { entries: entr }));
     }
-
-
   };
 
   onRouteChange = (route) => {
@@ -110,7 +107,7 @@ class App extends Component {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
-        <ParticlesBg type="fountain" bg={true} />
+        <ParticlesBg type="fountain" num={25} bg={true} />
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
