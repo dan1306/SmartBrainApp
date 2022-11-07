@@ -5,8 +5,10 @@ const bcrypt = require("bcrypt-nodejs");
 const db = knex({
   client: "pg",
   connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
+    host: process.env.host,
+    user:  process.env.user,
+    password: process.env.password,
+    database: process.env.database,
   },
 });
 
@@ -49,5 +51,5 @@ async function register(req, res) {
             res.status(400).json("unable to join");
           });
       });
-  }).catch((err) => res.status(400).json(err));
+  }).catch((err) => res.status(400).json("unable to register"));
 }

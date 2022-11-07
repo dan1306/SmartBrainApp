@@ -2,11 +2,13 @@ const knex = require("knex");
 const bcrypt = require("bcrypt-nodejs");
 
 const db = knex({
-    client: "pg",
-    connection: {
-      connectionString: process.env.DATABASE_URL,
-      ssl: true
-    },
+  client: "pg",
+  connection: {
+    host: process.env.host,
+    user:  process.env.user,
+    password: process.env.password,
+    database: process.env.database,
+  },
 });
   
 module.exports = {
