@@ -15,10 +15,8 @@ const favicon = require("serve-favicon");
 const db = knex({
     client: "pg",
     connection: {
-      host: "postgresql-trapezoidal-11938",
-      user: "postgres",
-      password: "",
-      database: "postgres",
+      host: process.env.DATABASE_URL,
+      ssl: true
     },
   });
 
