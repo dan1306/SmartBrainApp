@@ -33,7 +33,7 @@ class App extends Component {
       input: "",
       imageUrl: "",
       user: {
-        id: data.id,
+        id: data._id,
         name: data.name,
         email: data.email,
         entries: data.entries,

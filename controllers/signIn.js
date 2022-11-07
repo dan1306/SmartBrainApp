@@ -1,46 +1,31 @@
-const knex = require("knex");
-const bcrypt = require("bcrypt-nodejs");
+const bcrypt = require("bcrypt"); // import bcrypt
+const User = require("../models/user");
 
-const db = knex({
-  client: "pg",
-  connection: {
-    host: process.env.host,
-    user:  process.env.user,
-    password: process.env.password,
-    database: process.env.database,
-  },
-});
-  
 module.exports = {
-    signIn,
-  };
+  signIn,
+};
 
 async function signIn(req, res) {
-  console.log("donda", req.body)
+
   const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json("incorrect form inputs");
   }
-  db.select("email", "hash")
-    .from("login")
-    .where("email", "=", req.body.email)
-    .then((data) => {
-      console.log(data);
-      const valid = bcrypt.compareSync(req.body.password, data[0].hash);
 
-      if (valid) {
-        return db
-          .select("*")
-          .from("users")
-          .where("email", "=", req.body.email)
-          .then((user) => {
-            res.json(user[0]);
-          })
-          .catch((err) => res.status(400).json("unable to get user"));
-      } else {
-        res.status(400).json("wrong credentials");
-      }
-    })
-    .catch((err) => res.status(400).json("wrong credentials"));
+  try {
+    const user = await User.findOne({ email });
+    console.log(user);
+
+    const valid = await bcrypt.compare(req.body.password, user.hash);
+
+    if (valid) {
+      res.status(200).json(user);
+    } else {
+      res.status(400).json("wrong credentials");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
 }
