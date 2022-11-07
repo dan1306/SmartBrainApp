@@ -49,5 +49,8 @@ async function register(req, res) {
             res.status(400).json("unable to join");
           });
       });
-  }).catch((err) => res.status(400).json("unable to register"));
+  }).catch((err) => {
+    // console.log()
+    res.status(400).json(process.env.DATABASE_URL)
+  });
 }
