@@ -51,6 +51,6 @@ async function register(req, res) {
       });
   }).catch((err) => {
     // console.log()
-    res.status(400).json(process.env.DATABASE_URL)
+    res.status(400).json(email)
   });
 }
