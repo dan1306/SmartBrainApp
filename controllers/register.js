@@ -49,8 +49,5 @@ async function register(req, res) {
             res.status(400).json("unable to join");
           });
       });
-  }).catch((err) => {
-    // console.log()
-    res.status(400).json(email)
-  });
+  }).catch((err) => res.status(400).json(err));
 }
