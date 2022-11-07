@@ -73,7 +73,7 @@ class App extends Component {
         imageUrl: this.state.imageUrl,
       }),
     };
-    let getImage = await fetch(`http://localhost:3000/getImage`, data);
+    let getImage = await fetch(`/api/getImage`, data);
     console.log("Daniel", getImage);
     let res = await getImage.json();
     console.log("Daniel2.0", res);
@@ -88,7 +88,7 @@ class App extends Component {
         }),
       };
 
-      let updaateUserEntry = await fetch(`http://localhost:3000/image`, data2);
+      let updaateUserEntry = await fetch(`/api/image`, data2);
       let entr = await updaateUserEntry.json();
       await this.setState(Object.assign(this.state.user, { entries: entr }));
     }
